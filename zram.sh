@@ -9,6 +9,7 @@ mem=$(( ($totalmem / $cores)* 1024 ))
 
 core=0
 while [ $core -lt $cores ]; do
+  echo lz4 > /sys/block/zram$core/comp_algorithm
   echo $mem > /sys/block/zram$core/disksize
   mkswap /dev/zram$core
   swapon -p 5 /dev/zram$core
